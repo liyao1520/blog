@@ -1,26 +1,69 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Home.vue";
-
+import NProgress from "nprogress";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    component: () => import("@/views/home/index.vue"),
+    meta: {
+      transitionName: "slide-left",
+    },
+  },
+  {
+    path: "/tags",
+    component: () => import("@/views/tags/index.vue"),
+    meta: {
+      keepAlive: true, //设置页面是否需要使用缓存
+      transitionName: "slide-left",
+    },
+  },
+  {
+    path: "/demo",
+    component: () => import("@/views/demo/index.vue"),
+    meta: {
+      keepAlive: true, //设置页面是否需要使用缓存
+      transitionName: "slide-left",
+    },
+  },
+  {
+    path: "/archive",
+    component: () => import("@/views/archive/index.vue"),
+    meta: {
+      keepAlive: true, //设置页面是否需要使用缓存
+      transitionName: "slide-left",
+    },
   },
   {
     path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    component: () => import("@/views/about/index.vue"),
+    meta: {
+      keepAlive: true, //设置页面是否需要使用缓存
+      transitionName: "slide-left",
+    },
+  },
+  {
+    path: "/article/:id",
+    component: () => import("@/views/article/index.vue"),
+    meta: {
+      keepAlive: true, //设置页面是否需要使用缓存
+      transitionName: "slide-left",
+    },
   },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  scrollBehavior() {
+    return { top: 0, behavior: "smooth" };
+  },
+});
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
