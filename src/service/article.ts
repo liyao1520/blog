@@ -4,3 +4,7 @@ export const reqGetArticle = (params: any) =>
     url: "/article",
     params,
   });
+export const reqGetArticleById = (id: number | string) =>
+  request({
+    url: "/article/" + id,
+  });

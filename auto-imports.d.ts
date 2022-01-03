@@ -2,5 +2,6 @@
 // We suggest you to commit this file into source control
 declare global {
   const ElLoadingDirective: typeof import('element-plus/es')['ElLoadingDirective']
+  const ElPagination: typeof import('element-plus/es')['ElPagination']
 }
 export {}

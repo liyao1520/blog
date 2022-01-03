@@ -6,16 +6,17 @@
       </div>
       <div class="article-info">
         <span class="article-created-at"
-          >发表于{{ item.createdAt.slice(0, -8) }}</span
+          >发表于{{ item.createdAt?.slice(0, -8) }}</span
         >
         |
         <span class="article-classify"
           >分类于{{ item.classify ? item.classify.name : "未知" }}</span
         >
       </div>
-      <div class="article-content">
-        {{ item.content }}
-      </div>
+      <div
+        class="article-content"
+        v-html="(marked as any).parse(item.content).replace(/href=/g,'data-href=')"
+      ></div>
       <div class="article-read">
         <router-link :to="'/article/' + item.id">阅读全文</router-link>
       </div>
@@ -35,6 +36,7 @@
 </template>
 <script setup lang="ts">
 import { ElPagination } from "element-plus";
+import marked from "marked";
 import "element-plus/theme-chalk/el-pagination.css";
 // import "element-plus/theme-chalk/base.css";
 import { reqGetArticle } from "@/service/article";
@@ -115,6 +117,9 @@ const handleChange = (page: number) => {
   }
   .article-content {
     margin: 16px 0;
+    a {
+      cursor: auto;
+    }
   }
   .article-read {
     > a {

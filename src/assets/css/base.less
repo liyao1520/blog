@@ -1,5 +1,6 @@
 @import "./var.less";
 @import "./el-base.less";
+@import "./theme.less";
 
 * {
   margin: 0;
@@ -75,6 +76,10 @@ button,
 input {
   outline: none;
 }
+::selection {
+  color: #fff;
+  background-color: var(--font-primary-color);
+}
 
 @media screen and (min-width: 768px) {
   .container {
@@ -113,4 +118,8 @@ input {
 }
 #nprogress .bar {
   background: #333333 !important; //自定义颜色
+}
+#nprogress .spinner-icon {
+  border-top-color: #333333 !important;
+  border-left-color: #333333 !important;
 }

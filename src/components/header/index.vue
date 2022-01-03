@@ -11,11 +11,15 @@
             <span class="nav-item">{{ item.name }}</span>
           </router-link>
         </nav>
-        <i class="menu iconfont" @click="menuClickHandle" v-show="!isTop">{{
-          isMunuShow ? "&#xe7fc;" : "&#xeaf1;"
-        }}</i>
+        <i
+          class="menu iconfont"
+          ref="menuIconEl"
+          @click="menuClickHandle"
+          v-show="!isTop"
+          >{{ isMunuShow ? "&#xe7fc;" : "&#xeaf1;" }}</i
+        >
         <transition name="menu">
-          <nav class="menu-list" v-if="isMunuShow">
+          <nav class="menu-list" v-if="isMunuShow" ref="menuListEl">
             <router-link
               v-for="item in navList"
               :key="item.path"
@@ -35,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { throttle } from "lodash";
 import navList from "./navList";
 const isTop = ref(true);
@@ -71,9 +75,23 @@ onMounted(() => {
     }
   };
   window.addEventListener("scroll", throttle(scrollHandle, 50));
+  window.addEventListener("click", handleMunuOutSide);
 });
-
+onUnmounted(() => {
+  window.removeEventListener("click", handleMunuOutSide);
+});
 const isMunuShow = ref(false);
+// 移动端的menu
+const menuListEl = ref<HTMLElement | null>(null);
+const menuIconEl = ref<HTMLElement | null>(null);
+const handleMunuOutSide = (e: Event) => {
+  if (!menuListEl.value || menuIconEl.value === e.target) return;
+  const res = menuListEl.value.contains(e.target as Element);
+
+  if (!res) {
+    isMunuShow.value = false;
+  }
+};
 const menuClickHandle = () => {
   isMunuShow.value = !isMunuShow.value;
 };
@@ -175,7 +193,7 @@ const goTop = () => {
   }
   .menu-list {
     position: absolute;
-    width: 200px;
+    width: 150px;
     right: 0;
     top: calc(100% + 12px);
     height: 100vh;

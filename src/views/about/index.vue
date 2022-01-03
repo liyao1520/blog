@@ -1,6 +1,3 @@
 <template>
-  <div>
-    <span>tags</span><span>tags</span><span>tags</span><span>tags</span
-    ><span>tags</span><span>tags</span><span>tags</span>
-  </div>
+  <div>About</div>
 </template>
