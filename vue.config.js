@@ -24,5 +24,9 @@ module.exports = {
         resolvers: [ElementPlusResolver()],
       }),
     ],
+    externals: {
+      marked: "marked",
+      highlight: "hljs",
+    },
   },
 };

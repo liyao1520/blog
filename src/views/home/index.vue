@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-my-loading="isLoading">
     <div class="article" v-for="item in articleList" :key="item.id">
       <div class="article-title">
         <router-link :to="'/article/' + item.id"> {{ item.title }}</router-link>
@@ -9,7 +9,9 @@
           >发表于{{ item.createdAt.slice(0, -8) }}</span
         >
         |
-        <span class="article-classify">分类于{{ item.classify.name }}</span>
+        <span class="article-classify"
+          >分类于{{ item.classify ? item.classify.name : "未知" }}</span
+        >
       </div>
       <div class="article-content">
         {{ item.content }}
@@ -34,37 +36,47 @@
 <script setup lang="ts">
 import { ElPagination } from "element-plus";
 import "element-plus/theme-chalk/el-pagination.css";
-import "element-plus/theme-chalk/base.css";
+// import "element-plus/theme-chalk/base.css";
 import { reqGetArticle } from "@/service/article";
 import { IArticle } from "@/types";
 import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
+const isLoading = ref(false);
 const route = useRoute();
 const router = useRouter();
 const { page = "1" } = route.query;
 const pageNum = ref<string>(page as string);
 watch(
   () => route.query.page,
-
   async (page) => {
+    isLoading.value = true;
     pageNum.value = page as string;
     const res = await reqGetArticle({
       pageFlag: 1,
       pageSize: 10,
       pageNum: page,
+      sort: "new",
     });
     articleList.value = res.result;
     total.value = (res as any).count;
+    isLoading.value = false;
   }
 );
 const articleList = ref<IArticle[]>([]);
 const total = ref(0);
 
 onMounted(async () => {
-  const res = await reqGetArticle({ pageFlag: 1, pageSize: 10, pageNum: page });
+  const res = await reqGetArticle({
+    pageFlag: 1,
+    pageSize: 10,
+    pageNum: page,
+    sort: "new",
+  });
+  isLoading.value = true;
   articleList.value = res.result;
   total.value = (res as any).count;
+  isLoading.value = false;
 });
 
 const handleChange = (page: number) => {
@@ -129,5 +141,13 @@ const handleChange = (page: number) => {
   display: flex;
   justify-content: center;
   margin: 40px 0;
+  :deep(.el-pagination__jump) {
+    .el-input__inner {
+      border: 1px solid #ccc;
+      &:focus {
+        border: 1px solid var(--font-primary-color);
+      }
+    }
+  }
 }
 </style>

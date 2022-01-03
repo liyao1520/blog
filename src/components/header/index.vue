@@ -1,6 +1,6 @@
 <template>
   <transition name="hd">
-    <header class="page-hd" v-show="isShow">
+    <header class="page-hd" v-show="isHeaderShow">
       <div class="container header" :class="isTop && 'top'">
         <div class="logo">
           <router-link to="/"> Coderly </router-link>
@@ -29,35 +29,42 @@
       </div>
     </header>
   </transition>
+  <transition name="go-top">
+    <div class="go-top" v-show="isGoTopShow" @click="goTop">↑</div>
+  </transition>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { throttle } from "lodash";
 import navList from "./navList";
 const isTop = ref(true);
-const isShow = ref(true);
+const isHeaderShow = ref(true);
+const isGoTopShow = ref(false);
 const prevPageY = ref(0);
 
 onMounted(() => {
   const scrollHandle = () => {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
 
     const scrollY = window.scrollY;
     if (scrollY <= 40) {
       isTop.value = true;
+      isHeaderShow.value = true;
     } else {
       //如果isTop为true,则改为false
       isTop.value = false;
-      // 如果 scrollY > 300 则隐藏 header
+      // 如果 scrollY > 700 则隐藏 header
       if (scrollY > 700) {
-        isShow.value = false;
+        isGoTopShow.value = true;
+        isHeaderShow.value = false;
         // 如果用户往上滚动则直接显示
         if (prevPageY.value > scrollY) {
-          isShow.value = true;
+          isHeaderShow.value = true;
         }
       } else {
-        isShow.value = true;
+        isGoTopShow.value = false;
+        isHeaderShow.value = true;
       }
       //记录上一次scrollY
       prevPageY.value = scrollY;
@@ -69,6 +76,16 @@ onMounted(() => {
 const isMunuShow = ref(false);
 const menuClickHandle = () => {
   isMunuShow.value = !isMunuShow.value;
+};
+const goTop = () => {
+  if (window.scrollTo) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  } else {
+    document.documentElement.scrollTop = 0;
+  }
 };
 </script>
 
@@ -215,5 +232,27 @@ const menuClickHandle = () => {
 .menu-leave-active,
 .menu-enter-active {
   transition: 0.5s;
+}
+.go-top {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 36px;
+  height: 36px;
+  background-color: #333;
+  z-index: 999;
+  color: #fff;
+  text-align: center;
+  line-height: 36px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.go-top-enter-from,
+.go-top-leave-to {
+  transform: translateY(100px);
+}
+.go-top-enter-active,
+.go-top-leave-active {
+  transition: 0.6s;
 }
 </style>

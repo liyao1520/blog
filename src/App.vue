@@ -20,10 +20,8 @@ import myHeader from "@/components/header/index.vue";
 <style lang="less">
 @import "./assets/css/base.less";
 .page-main {
-  margin-top: 160px;
-  background-image: linear-gradient(#f5f5f5 1px, transparent 0),
-    linear-gradient(90deg, #f5f5f5 1px, transparent 0);
-  background-size: 30px 30px, 30px 30px;
+  margin-top: 200px;
+
   min-height: calc(100vh - 130px);
 }
 
