@@ -223,7 +223,8 @@ const goTop = () => {
 }
 @media screen and (max-width: 768px) {
   .top > .nav-list {
-    display: block;
+    display: flex;
+    justify-content: center;
     transform: translate(0, 40px) !important;
     left: 0;
     right: 0 !important;

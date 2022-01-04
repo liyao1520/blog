@@ -6,7 +6,7 @@
         <router-link
           :to="{
             path: '/archive',
-            query: { classifyId: item.id },
+            query: { classifyId: item.id, classifyName: item.name },
           }"
         >
           {{ item.name }} ( {{ item.count }} )
@@ -19,7 +19,7 @@
         <router-link
           :to="{
             path: '/archive',
-            query: { tagId: item.id },
+            query: { tagId: item.id, tagName: item.name },
           }"
           :class="calcSizeClass(item.count)"
         >

@@ -4,7 +4,42 @@
       <h1 class="article-title">{{ state.articleInfo.title }}</h1>
       <div class="article-info">
         <span>发表于{{ state.articleInfo.createdAt?.slice(0, -8) }}</span> |
-        <span>分类于{{ state.articleInfo.classify?.name }}</span>
+        <span
+          >分类于
+          <router-link
+            :to="{
+              path: '/archive',
+              query: {
+                classifyId: state.articleInfo.classify?.id,
+                classifyName: state.articleInfo.classify?.name,
+              },
+            }"
+          >
+            {{
+              state.articleInfo.classify
+                ? state.articleInfo.classify.name
+                : "未知"
+            }}
+          </router-link></span
+        >
+        <br />
+        <span
+          >标签:
+          <router-link
+            v-for="item in state.articleInfo.tags"
+            class="m5"
+            :key="item.id"
+            :to="{
+              path: '/archive',
+              query: {
+                tagId: item.id,
+                tagName: item.name,
+              },
+            }"
+          >
+            {{ item.name }}
+          </router-link>
+        </span>
       </div>
     </header>
     <div v-html="contentHTML" class="default-theme" ref="contentEl"></div>
@@ -26,15 +61,15 @@ const state = reactive<{ articleInfo: IArticle }>({
     content: "",
     title: "",
     count: 0,
+    createdAt: "",
+    updatedAt: "",
     classify: {
       id: 0,
       name: "",
       describe: "",
+      count: 0,
     },
-    tags: {
-      id: 0,
-      name: "",
-    },
+    tags: [],
     classifyId: 0,
   },
 });
@@ -76,8 +111,14 @@ onMounted(async () => {
       .article-info {
         text-align: center;
         color: var(--font-info-color);
+        a {
+          border-bottom: 1px solid currentColor;
+        }
       }
     }
   }
+}
+.m5 {
+  margin: 0 5px;
 }
 </style>

@@ -10,8 +10,19 @@
         >
         |
         <span class="article-classify"
-          >分类于{{ item.classify ? item.classify.name : "未知" }}</span
-        >
+          >分类于
+          <router-link
+            :to="{
+              path: '/archive',
+              query: {
+                classifyId: item.classify?.id,
+                classifyName: item.classify?.name,
+              },
+            }"
+          >
+            {{ item.classify ? item.classify.name : "未知" }}
+          </router-link>
+        </span>
       </div>
       <div
         class="article-content"
@@ -114,9 +125,13 @@ const handleChange = (page: number) => {
   .article-info {
     color: var(--font-info-color);
     font-size: 12px;
+    .article-classify > a {
+      border-bottom: 1px solid currentColor;
+    }
   }
   .article-content {
     margin: 16px 0;
+    opacity: 0.8;
     a {
       cursor: auto;
     }

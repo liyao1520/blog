@@ -2,12 +2,12 @@ export interface IClassify {
   id: number;
   name: string;
   describe?: string;
-  count?: number;
+  count: number;
 }
 export interface ITag {
   id: number;
   name: string;
-  count?: number;
+  count: number;
 }
 
 export interface IArticle {
@@ -18,9 +18,9 @@ export interface IArticle {
   likeCount?: number;
   canComment?: true;
   classifyId?: number;
-  createdAt?: string;
+  createdAt: string;
   updatedAt?: string;
   count?: number;
   classify: IClassify | null;
-  tags: ITag | null;
+  tags: ITag[] | null;
 }

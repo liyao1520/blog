@@ -11,6 +11,12 @@
         <i class="search-icon iconfont" @click="searchHandle">&#xe651;</i>
       </div>
     </nav>
+    <h1 v-if="$route.query.classifyId">
+      分类 : {{ $route.query.classifyName }}
+    </h1>
+    <h1 v-else-if="$route.query.tagId">标签 : {{ $route.query.tagName }}</h1>
+    <h1 v-else-if="$route.query.str">搜索关键词 : {{ $route.query.str }}</h1>
+    <h1 v-else>全部文章</h1>
     <div v-for="(list, year) in articleListMap" :key="year" class="articles">
       <h1 class="year">{{ year }}</h1>
       <div v-for="item in list" :key="item.id" class="article">
@@ -20,6 +26,7 @@
         </router-link>
       </div>
     </div>
+    <p style="margin-top: 40px" v-if="!articleList.length">没有找到文章~</p>
   </div>
 </template>
 <script setup lang="ts">
@@ -78,7 +85,6 @@ const searchHandle = () => {
   router.push({
     path: "/archive",
     query: {
-      ...route.query,
       str: str.value,
     },
   });
