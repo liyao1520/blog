@@ -13,7 +13,7 @@ import chroma from "chroma-js";
 import "element-plus/theme-chalk/el-color-picker.css";
 import { ref } from "vue";
 const isOpen = ref(false);
-const themeColor = localStorage.getItem("theme-color") || "";
+const themeColor = localStorage.getItem("theme-color") || "#333";
 
 const color = ref(themeColor);
 const changeHandle = (color: string) => {
@@ -33,13 +33,14 @@ const resetHandle = () => {
   style.removeProperty("--font-info-color");
   style.removeProperty("--a-color");
   style.removeProperty("--a-hover-color");
+  color.value = "#333";
 };
 </script>
 
 <style scoped lang="less">
 .custom-container {
   position: fixed;
-  left: -70px;
+  left: -80px;
   top: 50%;
   z-index: 999;
   width: 70px;
@@ -50,22 +51,24 @@ const resetHandle = () => {
   display: flex;
   flex-direction: column;
   transition: 0.2s;
+  border: 1px solid #ddd;
   .btn {
     position: absolute;
     right: -43px;
-    top: 0;
+    top: -1px;
     width: 43px;
     height: 43px;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     background-color: var(--header-footer-bg);
-    box-shadow: -3px 0 2px 0 rgb(0 0 0 / 2%);
     color: var(--font-primary-color);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 25px;
     cursor: pointer;
+    border: 1px solid #ddd;
+    border-left: 0;
   }
   .reset {
     margin-top: 3px;
