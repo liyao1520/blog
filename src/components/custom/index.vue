@@ -38,10 +38,15 @@ const resetHandle = () => {
 </script>
 
 <style scoped lang="less">
+@media screen and (max-width: 768px) {
+  div.custom-container {
+    display: none;
+  }
+}
 .custom-container {
   position: fixed;
   left: -80px;
-  top: 50%;
+  top: 40%;
   z-index: 999;
   width: 70px;
   height: 85px;

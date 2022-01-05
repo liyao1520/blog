@@ -1,49 +1,52 @@
 <template>
-  <article class="article">
-    <header>
-      <h1 class="article-title">{{ state.articleInfo.title }}</h1>
-      <div class="article-info">
-        <span>发表于{{ state.articleInfo.createdAt?.slice(0, -8) }}</span> |
-        <span
-          >分类于
-          <router-link
-            :to="{
-              path: '/archive',
-              query: {
-                classifyId: state.articleInfo.classify?.id,
-                classifyName: state.articleInfo.classify?.name,
-              },
-            }"
+  <div>
+    <article class="article" v-if="state.articleInfo.id">
+      <header>
+        <h1 class="article-title">{{ state.articleInfo.title }}</h1>
+        <div class="article-info">
+          <span>发表于{{ state.articleInfo.createdAt?.slice(0, -8) }}</span> |
+          <span
+            >分类于
+            <router-link
+              :to="{
+                path: '/archive',
+                query: {
+                  classifyId: state.articleInfo.classify?.id,
+                  classifyName: state.articleInfo.classify?.name,
+                },
+              }"
+            >
+              {{
+                state.articleInfo.classify
+                  ? state.articleInfo.classify.name
+                  : "未知"
+              }}
+            </router-link></span
           >
-            {{
-              state.articleInfo.classify
-                ? state.articleInfo.classify.name
-                : "未知"
-            }}
-          </router-link></span
-        >
-        <br />
-        <span
-          >标签:
-          <router-link
-            v-for="item in state.articleInfo.tags"
-            class="m5"
-            :key="item.id"
-            :to="{
-              path: '/archive',
-              query: {
-                tagId: item.id,
-                tagName: item.name,
-              },
-            }"
-          >
-            {{ item.name }}
-          </router-link>
-        </span>
-      </div>
-    </header>
-    <div v-html="contentHTML" class="default-theme" ref="contentEl"></div>
-  </article>
+          <br />
+          <span
+            >标签:
+            <router-link
+              v-for="item in state.articleInfo.tags"
+              class="m5"
+              :key="item.id"
+              :to="{
+                path: '/archive',
+                query: {
+                  tagId: item.id,
+                  tagName: item.name,
+                },
+              }"
+            >
+              {{ item.name }}
+            </router-link>
+          </span>
+        </div>
+      </header>
+      <div v-html="contentHTML" class="default-theme" ref="contentEl"></div>
+    </article>
+    <p v-else>加载中...</p>
+  </div>
 </template>
 <script setup lang="ts">
 import { reqGetArticleById } from "@/service/article";
@@ -91,6 +94,9 @@ onMounted(async () => {
 });
 </script>
 <style scoped lang="less">
+.article {
+  overflow-x: hidden;
+}
 @media screen and (min-width: 992px) {
   .article {
     padding: 30px;
@@ -98,6 +104,7 @@ onMounted(async () => {
     box-shadow: 7px 6px 16px #888;
     outline: 1px solid #ddd;
     background-color: #fff;
+
     &:hover {
       box-shadow: 14px 11px 27px #888;
     }

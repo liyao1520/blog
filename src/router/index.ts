@@ -44,7 +44,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/article/:id",
     component: () => import("@/views/article/index.vue"),
     meta: {
-      keepAlive: true, //设置页面是否需要使用缓存
+      keepAlive: false, //设置页面是否需要使用缓存
       transitionName: "slide-left",
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div v-my-loading="isLoading">
+  <div v-my-loading="isLoading" style="min-height: 70vh">
     <div class="article" v-for="item in articleList" :key="item.id">
       <div class="article-title">
         <router-link :to="'/article/' + item.id"> {{ item.title }}</router-link>
