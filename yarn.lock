@@ -156,6 +156,11 @@
     "@types/connect" "*"
     "@types/node" "*"
 
+"@types/chroma-js@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.npmmirror.com/@types/chroma-js/download/@types/chroma-js-2.1.3.tgz?cache=0&sync_timestamp=1637264537073&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fchroma-js%2Fdownload%2F%40types%2Fchroma-js-2.1.3.tgz#0b03d737ff28fad10eb884e0c6cedd5ffdc4ba0a"
+  integrity sha1-CwPXN/8o+tEOuITgxs7dX/3Eugo=
+
 "@types/connect-history-api-fallback@*":
   version "1.3.5"
   resolved "https://registry.npmmirror.com/@types/connect-history-api-fallback/download/@types/connect-history-api-fallback-1.3.5.tgz#d1f7a8a09d0ed5a57aee5ae9c18ab9b803205dae"
@@ -1642,6 +1647,13 @@ chownr@^1.1.1:
   resolved "https://registry.npm.taobao.org/chownr/download/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha1-b8nXtC0ypYNZYzdmbn0ICE2izGs=
 
+chroma-js@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.nlark.com/chroma-js/download/chroma-js-2.1.2.tgz#1075cb9ae25bcb2017c109394168b5cf3aa500ec"
+  integrity sha1-EHXLmuJbyyAXwQk5QWi1zzqlAOw=
+  dependencies:
+    cross-env "^6.0.3"
+
 chrome-trace-event@^1.0.2:
   version "1.0.3"
   resolved "https://registry.nlark.com/chrome-trace-event/download/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
@@ -2030,6 +2042,13 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+cross-env@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.npm.taobao.org/cross-env/download/cross-env-6.0.3.tgz#4256b71e49b3a40637a0ce70768a6ef5c72ae941"
+  integrity sha1-Qla3HkmzpAY3oM5wdopu9ccq6UE=
+  dependencies:
+    cross-spawn "^7.0.0"
 
 cross-spawn@^5.0.1:
   version "5.1.0"

@@ -110,6 +110,10 @@ const searchHandle = () => {
       padding: 4px 5px 4px 10px;
       border: 1px solid transparent;
       background-color: #f4f5f5;
+      color: var(--font-primary-color);
+      &::placeholder {
+        color: var(--font-info-color);
+      }
       transition: 0.2s;
       &:focus {
         border: 1px solid var(--font-primary-color);

@@ -81,7 +81,7 @@ const calcSizeClass = (count: number) => {
     &:hover {
       background-color: var(--font-primary-color);
       a {
-        color: var(--font-hover-bg);
+        color: var(--mian-bg);
       }
     }
   }

@@ -132,8 +132,11 @@ const handleChange = (page: number) => {
   .article-content {
     margin: 16px 0;
     opacity: 0.8;
-    a {
+    :deep(a) {
       cursor: auto;
+      &:hover {
+        color: var(--font-primary-color);
+      }
     }
   }
   .article-read {
@@ -162,8 +165,10 @@ const handleChange = (page: number) => {
   justify-content: center;
   margin: 40px 0;
   :deep(.el-pagination__jump) {
+    color: var(--font-primary-color);
     .el-input__inner {
-      border: 1px solid #ccc;
+      border: 1px solid var(--font-info-color);
+      color: var(--font-primary-color);
       &:focus {
         border: 1px solid var(--font-primary-color);
       }

@@ -13,9 +13,23 @@
     </div>
   </main>
   <footer></footer>
+  <custom />
 </template>
 <script setup lang="ts">
 import myHeader from "@/components/header/index.vue";
+import custom from "@/components/custom/index.vue";
+import chroma from "chroma-js";
+// 主题颜色设置
+const color = localStorage.getItem("theme-color");
+if (color) {
+  const darken = chroma(color).darken(1).hex();
+  const brighten = chroma(color).brighten(1).hex();
+  const style = document.body.style;
+  style.setProperty("--font-primary-color", color);
+  style.setProperty("--font-info-color", brighten);
+  style.setProperty("--a-color", color);
+  style.setProperty("--a-hover-color", darken);
+}
 </script>
 <style lang="less">
 @import "./assets/css/base.less";

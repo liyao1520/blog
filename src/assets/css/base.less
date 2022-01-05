@@ -13,6 +13,8 @@ body {
   background-image: linear-gradient(#f5f5f5 1px, transparent 0),
     linear-gradient(90deg, #f5f5f5 1px, transparent 0);
   background-size: 30px 30px, 30px 30px;
+  background-color: var(--mian-bg);
+  --el-color-primary: var(--font-primary-color);
 }
 h1,
 h2,
@@ -41,17 +43,16 @@ ol {
 }
 a:link,
 a:visited {
-  color: #5e5e5e;
+  color: rgb(94, 94, 94);
+  color: var(--a-color);
   text-decoration: none;
 }
 
 a:hover {
   color: #000; /*text-decoration: underline;*/
-  // background-color: var(--font-hover-bg);
+  color: var(--a-hover-color);
 }
-a:active {
-  color: #666;
-}
+
 .container {
   margin: auto;
   padding: 0 15px;
@@ -102,11 +103,11 @@ input {
 }
 @font-face {
   font-family: "iconfont"; /* Project id 3113963 */
-  src: url("//at.alicdn.com/t/font_3113963_uv6f567vtg.woff2?t=1641183735174")
+  src: url("//at.alicdn.com/t/font_3113963_6gkr6ldv84g.woff2?t=1641352317616")
       format("woff2"),
-    url("//at.alicdn.com/t/font_3113963_uv6f567vtg.woff?t=1641183735174")
+    url("//at.alicdn.com/t/font_3113963_6gkr6ldv84g.woff?t=1641352317616")
       format("woff"),
-    url("//at.alicdn.com/t/font_3113963_uv6f567vtg.ttf?t=1641183735174")
+    url("//at.alicdn.com/t/font_3113963_6gkr6ldv84g.ttf?t=1641352317616")
       format("truetype");
 }
 .iconfont {

@@ -113,9 +113,9 @@ const goTop = () => {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #f5f5f5;
-  border-bottom: #a2a2a2 1px solid;
-  box-shadow: 0 1px 2px #c0c0c0;
+  background-color: var(--header-footer-bg);
+  border-bottom: #cecdcd 1px solid;
+  box-shadow: 0 1px 2px #cfcece;
   padding-top: 10px;
   padding-bottom: 10px;
   z-index: 10;
@@ -145,7 +145,7 @@ const goTop = () => {
       }
     }
     a {
-      color: #333;
+      color: var(--font-primary-color);
     }
     &::after,
     &::before {
@@ -154,7 +154,7 @@ const goTop = () => {
       height: 3px;
       width: 70%;
       left: 13px;
-      background: #333;
+      background: var(--font-primary-color);
       transition: 0.4s;
     }
     &::before {
@@ -180,7 +180,7 @@ const goTop = () => {
     .router-link-active {
       transition: 0.2s;
       > span {
-        border-color: #333;
+        border-color: currentColor;
       }
     }
   }
@@ -235,6 +235,9 @@ const goTop = () => {
   .header .menu {
     display: block;
   }
+  .go-top {
+    right: 25px !important;
+  }
 }
 .hd-leave-to,
 .hd-enter-from {
@@ -258,7 +261,7 @@ const goTop = () => {
   right: 50px;
   width: 36px;
   height: 36px;
-  background-color: #333;
+  background-color: var(--font-primary-color);
   z-index: 999;
   color: #fff;
   text-align: center;
