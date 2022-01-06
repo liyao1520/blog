@@ -17,6 +17,9 @@
     <h1 v-else-if="$route.query.tagId">标签 : {{ $route.query.tagName }}</h1>
     <h1 v-else-if="$route.query.str">搜索关键词 : {{ $route.query.str }}</h1>
     <h1 v-else>全部文章</h1>
+    <div class="count" v-if="articleList.length">
+      共篇{{ articleList.length }}文章~
+    </div>
     <div v-for="(list, year) in articleListMap" :key="year" class="articles">
       <h1 class="year">{{ year }}</h1>
       <div v-for="item in list" :key="item.id" class="article">
@@ -91,6 +94,11 @@ const searchHandle = () => {
 };
 </script>
 <style scoped lang="less">
+.count {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--font-info-color);
+}
 .nav-list {
   display: flex;
   justify-content: flex-end;
