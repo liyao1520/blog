@@ -96,6 +96,22 @@ onMounted(async () => {
 <style scoped lang="less">
 .article {
   overflow-x: hidden;
+
+  header {
+    margin: 10px 0;
+    .article-title {
+      text-align: center;
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    .article-info {
+      text-align: center;
+      color: var(--font-info-color);
+      a {
+        border-bottom: 1px solid currentColor;
+      }
+    }
+  }
 }
 @media screen and (min-width: 992px) {
   .article {
@@ -107,21 +123,6 @@ onMounted(async () => {
 
     &:hover {
       box-shadow: 14px 11px 27px #888;
-    }
-    header {
-      margin: 10px 0;
-      .article-title {
-        text-align: center;
-        font-size: 24px;
-        margin: 20px 0;
-      }
-      .article-info {
-        text-align: center;
-        color: var(--font-info-color);
-        a {
-          border-bottom: 1px solid currentColor;
-        }
-      }
     }
   }
 }
