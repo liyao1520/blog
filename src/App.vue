@@ -12,11 +12,12 @@
       </router-view>
     </div>
   </main>
-  <footer></footer>
+  <my-footer />
   <custom />
 </template>
 <script setup lang="ts">
 import myHeader from "@/components/header/index.vue";
+import myFooter from "@/components/footer/index.vue";
 import custom from "@/components/custom/index.vue";
 import chroma from "chroma-js";
 // 主题颜色设置
@@ -35,7 +36,6 @@ if (color) {
 @import "./assets/css/base.less";
 .page-main {
   margin-top: 200px;
-
   min-height: calc(100vh - 130px);
 }
 

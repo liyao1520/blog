@@ -1,5 +1,5 @@
 <template>
-  <div class="markdowm-body" v-html="mdHTML"></div>
+  <div class="default-theme" v-html="mdHTML"></div>
 </template>
 <script setup lang="ts">
 import marked from "marked";
@@ -12,3 +12,8 @@ onMounted(async () => {
   mdHTML.value = (marked as any).parse(md);
 });
 </script>
+<style scoped lang="less">
+:deep(ul, ol) {
+  list-style: disc;
+}
+</style>
