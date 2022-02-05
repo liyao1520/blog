@@ -1,21 +1,33 @@
 <template>
   <div class="custom-container" :class="{ open: isOpen }">
-    <icon class="btn iconfont" @click="isOpen = !isOpen">&#xeaec;</icon>
+    <i class="btn iconfont" @click="isOpen = !isOpen">&#xeaec;</i>
     <div>主题色</div>
     <el-color-picker v-model="color" @change="changeHandle" />
+    <div>Markdown 主题</div>
+    <select v-model="markdownTheme">
+      <option
+        v-for="item in Object.keys(themes)"
+        :key="item"
+        :value="item"
+        :label="item"
+      />
+    </select>
     <button class="reset" @click="resetHandle">重置</button>
   </div>
 </template>
 
 <script setup lang="ts">
+import themes from "../../themes/index";
 import { ElColorPicker } from "element-plus";
 import chroma from "chroma-js";
 import "element-plus/theme-chalk/el-color-picker.css";
 import { ref } from "vue";
+import useMarkdownTheme from "@/themes/useMarkdownTheme";
 const isOpen = ref(false);
 const themeColor = localStorage.getItem("theme-color") || "#333";
 
 const color = ref(themeColor);
+
 const changeHandle = (color: string) => {
   localStorage.setItem("theme-color", color);
   const darken = chroma(color).darken(1).hex();
@@ -34,7 +46,11 @@ const resetHandle = () => {
   style.removeProperty("--a-color");
   style.removeProperty("--a-hover-color");
   color.value = "#333";
+  markdownTheme.value = "default";
 };
+
+//theme
+const markdownTheme = useMarkdownTheme();
 </script>
 
 <style scoped lang="less">
@@ -45,10 +61,10 @@ const resetHandle = () => {
 }
 .custom-container {
   position: fixed;
-  left: -80px;
+  left: -130px;
   top: 40%;
   z-index: 999;
-  width: 70px;
+  width: 120px;
   height: 85px;
   background-color: var(--header-footer-bg);
   box-shadow: 0 0 4px 3px rgba(0, 0, 0, 5%);
@@ -57,6 +73,7 @@ const resetHandle = () => {
   flex-direction: column;
   transition: 0.2s;
   border: 1px solid #ddd;
+  font-size: 13px;
   .btn {
     position: absolute;
     right: -43px;
@@ -76,8 +93,13 @@ const resetHandle = () => {
     border-left: 0;
   }
   .reset {
-    margin-top: 3px;
     cursor: pointer;
+    padding: 5px 0;
+    border: 1px solid transparent;
+    transition: 0.2s;
+    &:hover {
+      border: 1px solid #ccc;
+    }
   }
 }
 .open {

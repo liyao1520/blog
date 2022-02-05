@@ -24,6 +24,7 @@
               v-for="item in navList"
               :key="item.path"
               :to="item.path"
+              @click="isMunuShow = false"
             >
               <i class="iconfont icon">{{ item.icon }}</i>
               <span class="menu-item">{{ item.name }}</span>

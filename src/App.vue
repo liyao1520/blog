@@ -1,5 +1,6 @@
 <template>
   <my-header />
+  <custom />
   <main class="page-main">
     <div class="container">
       <router-view #default="{ Component, route }">
@@ -13,7 +14,6 @@
     </div>
   </main>
   <my-footer />
-  <custom />
 </template>
 <script setup lang="ts">
 import myHeader from "@/components/header/index.vue";

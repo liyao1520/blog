@@ -1,5 +1,5 @@
 <template>
-  <div class="default-theme" v-html="mdHTML"></div>
+  <div class="markdown-body" v-html="mdHTML"></div>
 </template>
 <script setup lang="ts">
 import marked from "marked";

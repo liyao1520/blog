@@ -24,6 +24,11 @@
             </router-link></span
           >
           <br />
+        </div>
+      </header>
+      <div v-html="contentHTML" class="markdown-body" ref="contentEl"></div>
+      <footer>
+        <div class="article-info">
           <span
             >标签:
             <router-link
@@ -42,8 +47,7 @@
             </router-link>
           </span>
         </div>
-      </header>
-      <div v-html="contentHTML" class="default-theme" ref="contentEl"></div>
+      </footer>
     </article>
     <p v-else>加载中...</p>
   </div>
@@ -111,6 +115,15 @@ onMounted(async () => {
         border-bottom: 1px solid currentColor;
       }
     }
+  }
+}
+footer .article-info {
+  margin-top: 80px;
+  color: var(--font-info-color);
+  font-size: 18px;
+  text-align: right;
+  a {
+    border-bottom: 1px solid currentColor;
   }
 }
 @media screen and (min-width: 992px) {
