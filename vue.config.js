@@ -28,6 +28,9 @@ module.exports = {
     externals: {
       marked: "marked",
       highlight: "hljs",
+      vue: "Vue",
+      "vue-router": "VueRouter",
+      "chroma-js": "chroma",
     },
   },
 };
