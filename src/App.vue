@@ -39,12 +39,16 @@ if (color) {
   min-height: calc(100vh - 130px);
 }
 
-.slide-left-enter-active,
+.slide-left-enter-active {
+  transition: 0.4s;
+}
 .slide-left-leave-active {
   transition: 0.3s;
 }
-
-.slide-left-enter-from,
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(300px);
+}
 .slide-left-leave-to {
   opacity: 0;
   transform: translateX(-300px);

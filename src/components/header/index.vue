@@ -127,7 +127,7 @@ const goTop = () => {
   height: 50px;
   display: flex;
   align-items: center;
-  transition: 0.6s;
+  transition: 0.4s;
 
   .logo {
     position: absolute;
@@ -138,7 +138,8 @@ const goTop = () => {
     height: 50px;
     display: flex;
     align-items: center;
-    transition: 0.4s;
+    transition: 0.6s;
+    will-change: transfrom;
     &:hover {
       &::before,
       &::after {
@@ -156,7 +157,7 @@ const goTop = () => {
       width: 70%;
       left: 13px;
       background: var(--font-primary-color);
-      transition: 0.4s;
+      transition: 0.6s;
     }
     &::before {
       top: 0px;
@@ -168,7 +169,8 @@ const goTop = () => {
   .nav-list {
     position: absolute;
     right: 20px;
-    transition: 0.2s;
+    transition: 0.6s;
+    will-change: transfrom;
     .nav-item {
       margin: 0 10px;
       padding: 5px 10px;
