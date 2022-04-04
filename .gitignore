@@ -2,6 +2,7 @@
 node_modules
 /dist
 /test
+/ssr
 
 # local env files
 .env.local

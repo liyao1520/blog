@@ -84,12 +84,18 @@ const contentHTML = computed(() => {
   return (marked as any).parse(state.articleInfo.content);
 });
 onMounted(async () => {
+  if ((window as any).__articleInfo__ !== undefined) {
+    let __articleInfo__ = (window as any).__articleInfo__;
+    if (__articleInfo__) {
+      state.articleInfo = __articleInfo__;
+      (window as any).__articleInfo__ = null;
+    }
+    return;
+  }
   const { result } = await reqGetArticleById(id as string);
   state.articleInfo = result;
   nextTick(() => {
     if (contentEl.value) {
-      console.log(contentEl.value);
-
       contentEl.value.querySelectorAll("pre code").forEach((el) => {
         hljs.highlightBlock(el as HTMLElement);
       });
