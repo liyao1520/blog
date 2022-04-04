@@ -18,10 +18,6 @@ module.exports = {
         },
         changeOrigin: true,
       },
-      "^/article": {
-        target: "http://localhost:3002",
-        changeOrigin: true,
-      },
     },
   },
   configureWebpack: {
