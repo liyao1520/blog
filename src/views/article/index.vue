@@ -90,10 +90,10 @@ onMounted(async () => {
       state.articleInfo = __articleInfo__;
       (window as any).__articleInfo__ = null;
     }
-    return;
+  } else {
+    const { result } = await reqGetArticleById(id as string);
+    state.articleInfo = result;
   }
-  const { result } = await reqGetArticleById(id as string);
-  state.articleInfo = result;
   nextTick(() => {
     if (contentEl.value) {
       contentEl.value.querySelectorAll("pre code").forEach((el) => {

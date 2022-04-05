@@ -2,7 +2,7 @@
   <div v-my-loading="isLoading" style="min-height: 70vh">
     <div class="article" v-for="item in articleList" :key="item.id">
       <div class="article-title">
-        <a :href="'/article/' + item.id"> {{ item.title }}</a>
+        <a :href="'/article/' + item.id" target="_blank"> {{ item.title }}</a>
       </div>
       <div class="article-info">
         <span class="article-created-at"
@@ -29,7 +29,7 @@
         v-html="(marked as any).parse(item.content).replace(/href=/g,'data-href=')"
       ></div>
       <div class="article-read">
-        <a :href="'/article/' + item.id">阅读全文</a>
+        <a :href="'/article/' + item.id" target="_blank">阅读全文</a>
       </div>
     </div>
     <div class="pagination">
