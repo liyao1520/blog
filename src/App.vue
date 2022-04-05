@@ -37,6 +37,7 @@ if (color) {
 .page-main {
   margin-top: 200px;
   min-height: calc(100vh - 130px);
+  overflow-x: hidden;
 }
 
 .slide-left-enter-active {
