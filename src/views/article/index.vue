@@ -84,7 +84,7 @@ const contentHTML = computed(() => {
   return (marked as any).parse(state.articleInfo.content);
 });
 onMounted(async () => {
-  if ((window as any).__articleInfo__ !== undefined) {
+  if ((window as any).__articleInfo__ != null) {
     let __articleInfo__ = (window as any).__articleInfo__;
     if (__articleInfo__) {
       state.articleInfo = __articleInfo__;
