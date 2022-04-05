@@ -26,7 +26,11 @@
           <br />
         </div>
       </header>
-      <div v-html="contentHTML" class="markdown-body" ref="contentEl"></div>
+      <div
+        v-html="state.contentHTML"
+        class="markdown-body"
+        ref="contentEl"
+      ></div>
       <footer>
         <div class="article-info">
           <span
@@ -55,14 +59,14 @@
 <script setup lang="ts">
 import { reqGetArticleById } from "@/service/article";
 import { IArticle } from "@/types";
-import marked from "marked";
 import hljs from "highlight.js";
-import { computed, nextTick, onMounted, reactive, ref } from "vue";
+import marked from "marked";
+import { nextTick, onMounted, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 const contentEl = ref<HTMLDivElement | null>(null);
 const route = useRoute();
 const id = route.params.id;
-const state = reactive<{ articleInfo: IArticle }>({
+const state = reactive<{ articleInfo: IArticle; contentHTML: string }>({
   articleInfo: {
     id: 0,
     content: "",
@@ -79,20 +83,23 @@ const state = reactive<{ articleInfo: IArticle }>({
     tags: [],
     classifyId: 0,
   },
+  contentHTML: "",
 });
-const contentHTML = computed(() => {
-  return (marked as any).parse(state.articleInfo.content);
-});
+
 onMounted(async () => {
   if ((window as any).__articleInfo__ != null) {
     let __articleInfo__ = (window as any).__articleInfo__;
     if (__articleInfo__) {
       state.articleInfo = __articleInfo__;
+      const template = document.querySelector("#__articleInfo__");
+      state.contentHTML = template?.innerHTML || "";
       (window as any).__articleInfo__ = null;
+      template?.remove();
     }
   } else {
     const { result } = await reqGetArticleById(id as string);
     state.articleInfo = result;
+    state.contentHTML = (marked as any).parse(state.articleInfo.content);
   }
   nextTick(() => {
     if (contentEl.value) {
