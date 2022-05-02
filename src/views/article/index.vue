@@ -59,10 +59,12 @@
 <script setup lang="ts">
 import { reqGetArticleById } from "@/service/article";
 import { IArticle } from "@/types";
+import lazyImage from "@/utils/lazyImage";
 import hljs from "highlight.js";
 import marked from "marked";
 import { nextTick, onMounted, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
+import renderer from "../../utils/markedParser";
 const contentEl = ref<HTMLDivElement | null>(null);
 const route = useRoute();
 const id = route.params.id;
@@ -99,20 +101,40 @@ onMounted(async () => {
   } else {
     const { result } = await reqGetArticleById(id as string);
     state.articleInfo = result;
-    state.contentHTML = (marked as any).parse(state.articleInfo.content);
+
+    state.contentHTML = (marked as any)(state.articleInfo.content, {
+      renderer,
+    });
   }
   nextTick(() => {
     if (contentEl.value) {
       contentEl.value.querySelectorAll("pre code").forEach((el) => {
         hljs.highlightBlock(el as HTMLElement);
       });
+      // 懒加载图片
+      lazyImage(contentEl.value);
     }
   });
 });
 </script>
 <style scoped lang="less">
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
 .article {
   overflow-x: hidden;
+  .markdown-body :deep(img) {
+    width: 85%;
+    background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+    background-size: 400% 100%;
+    padding: 0;
+    animation: skeleton-loading 1s ease infinite;
+  }
 
   header {
     margin: 10px 0;
