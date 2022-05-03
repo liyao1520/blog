@@ -57,14 +57,17 @@
   </div>
 </template>
 <script setup lang="ts">
+import marked from "marked";
+import hljs from "highlight.js";
+import { nextTick, onMounted, reactive, ref } from "vue";
+import { useRoute } from "vue-router";
+
 import { reqGetArticleById } from "@/service/article";
 import { IArticle } from "@/types";
 import lazyImage from "@/utils/lazyImage";
-import hljs from "highlight.js";
-import marked from "marked";
-import { nextTick, onMounted, reactive, ref } from "vue";
-import { useRoute } from "vue-router";
-import renderer from "../../utils/markedParser";
+import bigImage from "@/utils/bigImage";
+import renderer from "@/utils/markedRenderer";
+
 const contentEl = ref<HTMLDivElement | null>(null);
 const route = useRoute();
 const id = route.params.id;
@@ -113,6 +116,8 @@ onMounted(async () => {
       });
       // 懒加载图片
       lazyImage(contentEl.value);
+      // 点击放大
+      bigImage(contentEl.value);
     }
   });
 });
@@ -134,6 +139,7 @@ onMounted(async () => {
     background-size: 400% 100%;
     padding: 0;
     animation: skeleton-loading 1s ease infinite;
+    cursor: zoom-in;
   }
 
   header {
