@@ -35,6 +35,10 @@ const themeColor = localStorage.getItem("theme-color") || "#333";
 const color = ref(themeColor);
 
 const changeHandle = (color: string) => {
+  if (!color) {
+    return;
+  }
+
   localStorage.setItem("theme-color", color);
   const darken = chroma(color).darken(1).hex();
   const brighten = chroma(color).brighten(1).hex();
