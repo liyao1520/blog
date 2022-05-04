@@ -2,7 +2,11 @@
   <div class="custom-container" :class="{ open: isOpen }">
     <i class="btn iconfont" @click="isOpen = !isOpen">&#xeaec;</i>
     <div>主题色</div>
-    <el-color-picker v-model="color" @change="changeHandle" />
+    <el-color-picker
+      v-model="color"
+      @change="changeHandle"
+      @active-change="changeHandle"
+    />
     <div>Markdown 主题</div>
     <select v-model="markdownTheme">
       <option
@@ -10,7 +14,9 @@
         :key="item"
         :value="item"
         :label="item"
-      />
+      >
+        {{ item }}
+      </option>
     </select>
     <button class="reset" @click="resetHandle">重置</button>
   </div>
