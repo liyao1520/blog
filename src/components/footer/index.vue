@@ -1,6 +1,6 @@
 <template>
   <footer class="page-ft">
-    <div style="width: 300px; margin: 0 auto; padding: 20px 0">
+    <div style="display: flex; justify-content: center">
       <img src="~@/assets/备案图标.png" alt="" />
       <a
         target="_blank"
@@ -12,17 +12,20 @@
           line-height: 20px;
         "
         ><img src="" style="float: left" />
-        <p
-          style="
-            float: left;
-            height: 20px;
-            line-height: 20px;
-            margin: 0px 0px 0px 5px;
-            color: #939393;
-          "
-        >
+        <p style="float: left; margin: 0px 0px 0px 5px; color: #939393">
           豫公网安备 41052202001304号
         </p></a
+      >
+      <a
+        style="
+          display: inline-block;
+          text-decoration: none;
+          color: #939393;
+          margin-left: 30px;
+        "
+        href="https://beian.miit.gov.cn/"
+        target="_blank"
+        >ICP备案/许可证号：豫ICP备2022000857号</a
       >
     </div>
   </footer>
